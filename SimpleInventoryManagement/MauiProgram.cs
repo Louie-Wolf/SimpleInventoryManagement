@@ -1,4 +1,7 @@
-﻿namespace SimpleInventoryManagement;
+﻿using SimpleInventoryManagement.Services;
+using SimpleInventoryManagement.ViewModel;
+
+namespace SimpleInventoryManagement;
 
 public static class MauiProgram
 {
@@ -12,6 +15,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+		builder.Services.AddSingleton<ItemService>();
+
+		builder.Services.AddSingleton<ItemsViewModel>();
+
+		builder.Services.AddSingleton<MainPage>();
 
 		return builder.Build();
 	}
