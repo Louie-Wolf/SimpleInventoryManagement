@@ -27,7 +27,7 @@ namespace SimpleInventoryManagement.ViewModel
             try
             {
                 IsBusy = true;
-                var items = await itemService.GetItems();
+                var items = await itemService.GetAllItems();
 
                 if(Items.Count > 0)
                     Items.Clear();

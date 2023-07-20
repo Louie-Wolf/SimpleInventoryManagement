@@ -1,4 +1,5 @@
 ﻿using SimpleInventoryManagement.ViewModel;
+
 namespace SimpleInventoryManagement;
 
 public partial class MainPage : ContentPage
