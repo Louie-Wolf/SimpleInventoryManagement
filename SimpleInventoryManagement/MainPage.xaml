@@ -7,4 +7,46 @@
              Title="{Binding Title}"
              x:Class="SimpleInventoryManagement.MainPage">
 
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*, Auto">
+
+        <CollectionView BackgroundColor="DarkOliveGreen" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Item">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125" Padding="0">
+                            <Grid Padding="0" ColumnDefinitions="125, *">
+                                <Image Aspect="AspectFill"
+                                       Source="{Binding Photo}"
+                                       WidthRequest="125"
+                                       HeightRequest="125"/>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Padding="10"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding Name}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Anzeigen"
+                Command="{Binding GetItemsCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Margin="8"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"/>
+
+    </Grid>
+
 </ContentPage>
