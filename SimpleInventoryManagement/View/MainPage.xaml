@@ -11,12 +11,21 @@
           ColumnSpacing="5"
           RowDefinitions="*, Auto">
 
-        <CollectionView BackgroundColor="DarkOliveGreen" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None">
+        <CollectionView BackgroundColor="DarkOliveGreen" 
+                        Grid.ColumnSpan="2" 
+                        ItemsSource="{Binding Items}" 
+                        SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Item">
                     <Grid Padding="10">
-                        <Frame HeightRequest="125" Padding="0">
-                            <Grid Padding="0" ColumnDefinitions="125, *">
+                        <Frame HeightRequest="125" 
+                               Padding="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ItemsViewModel}}, Path=GoToDetailsCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0" 
+                                  ColumnDefinitions="125, *">
                                 <Image Aspect="AspectFill"
                                        Source="{Binding Photo}"
                                        WidthRequest="125"

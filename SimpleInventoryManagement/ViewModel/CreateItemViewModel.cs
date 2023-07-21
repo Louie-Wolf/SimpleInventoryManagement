@@ -7,6 +7,8 @@ namespace SimpleInventoryManagement.ViewModel
     public partial class CreateItemViewModel : BaseViewModel
     {
         private ItemService itemService;
+        private IMediaPicker mediaPicker;
+
         public CreateItemViewModel(ItemService itemService)
         {
             Title = "Erstelle Eintrag";
@@ -21,6 +23,13 @@ namespace SimpleInventoryManagement.ViewModel
 
             try
             {
+                if (!mediaPicker.IsCaptureSupported)
+                {
+#if DEBUG
+                    await Shell.Current.DisplayAlert("Error!", "Capture is not supported!", "OK");
+#endif
+                    return;
+                }
                 IsBusy = true; //Todo: replacce placeholder with ui content
                 await itemService.AddNewItem("PLACEHOLDER", "PLACEHOLDER");
 

@@ -1,5 +1,6 @@
 ﻿using SimpleInventoryManagement.Services;
 using SimpleInventoryManagement.Model;
+using SimpleInventoryManagement.View;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -16,6 +17,19 @@ namespace SimpleInventoryManagement.ViewModel
             Title = "Items Finder";
             this.itemService = itemService;
 
+        }
+
+        [RelayCommand]
+        private async Task GoToDetailsAsync(Item item)
+        {
+            if (item is null)
+                return;
+            //interface instead of shell reference?
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailsPage)}",true, 
+                new Dictionary<string, object> 
+                { 
+                    { "Item", item } 
+                });
         }
 
         [RelayCommand]
@@ -39,7 +53,7 @@ namespace SimpleInventoryManagement.ViewModel
             {
                 Debug.WriteLine(ex);
 
-#if DEBUG //should not actually display the error in real app!
+#if DEBUG //should not actually display the error in the real app!
                 await Shell.Current.DisplayAlert("Error!", $"Unable to get items: {ex.Message}", "OK");
 #endif
             }

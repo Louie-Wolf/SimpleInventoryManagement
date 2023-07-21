@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using SimpleInventoryManagement.Model;
 
 namespace SimpleInventoryManagement.ViewModel
 {
-    internal class ItemsDetailsViewModel
+    [QueryProperty("Item","Item")]
+    public partial class ItemsDetailsViewModel : BaseViewModel
     {
+        public ItemsDetailsViewModel()
+        {
+
+        }
+
+        [ObservableProperty]
+        Item item;
     }
 }
