@@ -30,8 +30,22 @@ namespace SimpleInventoryManagement.ViewModel
 #endif
                     return;
                 }
+
+                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+
+                if (photo == null)
+                {
+#if DEBUG
+                    await Shell.Current.DisplayAlert("Error!", "Photo is null!", "OK");
+#endif
+                    return;
+                }
+
+                string localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+
+
                 IsBusy = true; //Todo: replacce placeholder with ui content
-                await itemService.AddNewItem("PLACEHOLDER", "PLACEHOLDER");
+                await itemService.AddNewItem("PLACEHOLDER", localFilePath);
 
             }
             catch (Exception e)
